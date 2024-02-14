@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Wrapper, NoButton, Button, WinContainer } from "./Homescreen.styles";
-import { Modal, Box, Typography } from "@mui/material";
+import { MUImodal } from "../Modal/MUImodal";
+import { CuteImage } from "../CuteImage/CuteImage";
 
 type Props = {};
 
 const Homescreen: React.FC<Props> = () => {
-  const MAX_COUNT = 21;
+  const START_COUNT = 21;
   const FINAL_MAX_COUNT = 51;
   const [position, setPosition] = useState({
     x: 0,
     y: 0,
   });
 
-  const [showOriginalNo, setShow] = useState(true);
+  const [showOriginalNo, setShowOriginalNo] = useState(true);
   const [count, setCount] = useState(0);
   const [message, setMessage] = useState("");
   const [winButtonText, setWinButtonText] = useState("Claim Prize");
@@ -26,26 +27,13 @@ const Homescreen: React.FC<Props> = () => {
     height: 60,
   });
 
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-    color: "black",
-  };
-
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const getRandomPosition = () => {
     const maxX = window.innerWidth - 200;
-    const maxY = window.innerHeight - 50;
+    const maxY = window.innerHeight - 60;
     const newX = Math.floor(Math.random() * maxX);
     const newY = Math.floor(Math.random() * maxY);
     return { x: newX, y: newY };
@@ -68,7 +56,7 @@ const Homescreen: React.FC<Props> = () => {
         setMessage("Don't you think you're overdoing it?");
       } else if (newCount > 17 && newCount <= 21) {
         setMessage("PLEASEEEEEEEE");
-      } else if (newCount > MAX_COUNT && newCount <= 30) {
+      } else if (newCount > START_COUNT && newCount <= 30) {
         setimgURL("https://giphy.com/embed/LRr751mok58RyC0nZ0");
         setMessage("Fine, I'm gonna count until you say yes");
       } else if (newCount > 30 && newCount <= 50) {
@@ -89,15 +77,9 @@ const Homescreen: React.FC<Props> = () => {
   if (yesClicked) {
     return (
       <>
+        <MUImodal open={open} handleClose={handleClose} />
         <Wrapper>
-          <iframe
-            src={imgURL}
-            width="240"
-            height="240"
-            frameBorder="0"
-            className="giphy-embed"
-            allowFullScreen
-          ></iframe>
+          <CuteImage imgURL={imgURL} />
           <h1>I knew you would accept me!!</h1>
           <h1>I LOVE YOU AND THANK YOU FOR BEING MY VALENTINE'S EHE</h1>
         </Wrapper>
@@ -106,21 +88,6 @@ const Homescreen: React.FC<Props> = () => {
   } else if (count < FINAL_MAX_COUNT) {
     return (
       <>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              ALERT
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              You must click YES now or else your browser will crash.
-            </Typography>
-          </Box>
-        </Modal>
         {!showOriginalNo ? (
           <NoButton
             leftPosition={position.x}
@@ -132,24 +99,14 @@ const Homescreen: React.FC<Props> = () => {
         ) : null}
 
         <Wrapper>
-          <iframe
-            src={imgURL}
-            width="240"
-            height="240"
-            frameBorder="0"
-            className="giphy-embed"
-            allowFullScreen
-          ></iframe>
+          <CuteImage imgURL={imgURL} />
           <h1>Will you be my Valentine's?</h1>
           {<h1 dangerouslySetInnerHTML={{ __html: message }}></h1>}
 
-          {count > MAX_COUNT ? <h1>Rejection count: {count}</h1> : null}
+          {count > START_COUNT ? <h1>Rejection count: {count}</h1> : null}
           <Button
             fontSize={buttonStyle.fontSize}
             height={buttonStyle.height}
-            onMouseOver={() => {
-              console.log(showOriginalNo);
-            }}
             onClick={() => {
               setimgURL("https://giphy.com/embed/wuBduJG4DIVpMqwaEj");
               setYesClicked(true);
@@ -161,7 +118,7 @@ const Homescreen: React.FC<Props> = () => {
             <Button
               fontSize={buttonStyle.fontSize}
               height={buttonStyle.height}
-              onMouseOver={() => setShow(false)}
+              onMouseOver={() => setShowOriginalNo(false)}
             >
               No
             </Button>
@@ -173,7 +130,7 @@ const Homescreen: React.FC<Props> = () => {
     return (
       <Wrapper>
         <h1>You're very persistent. Congratulations.</h1>
-        <h1>Click the button to accept your prize</h1>
+        <h1>Click 'Claim Prize' to accept your prize</h1>
         <WinContainer
           onClick={() => {
             setimgURL("https://giphy.com/embed/wuBduJG4DIVpMqwaEj");
