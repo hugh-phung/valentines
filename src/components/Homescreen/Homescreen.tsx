@@ -82,7 +82,7 @@ const Homescreen: React.FC<Props> = () => {
         <Wrapper>
           <CuteImage imgURL={imgURL} />
           <h1>I knew you would accept me!!</h1>
-          <h1>I LOVE YOU AND THANK YOU FOR BEING MY VALENTINE'S EHE</h1>
+          <h1>THANK YOU FOR BEING MY VALENTINE'S EHE</h1>
         </Wrapper>
       </>
     );

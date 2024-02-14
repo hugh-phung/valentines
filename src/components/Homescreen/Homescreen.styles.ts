@@ -19,11 +19,11 @@ export const Wrapper = styled.div`
   transform: translate(-50%, -50%);
   padding: 20px;
 
-  h1 {
-    font-family: Fascinate Inline, Haettenschweiler, "Arial Narrow Bold",
-      sans-serif;
-    font-size: 40px;
-    font-weight: 400;
+  h1,
+  body {
+    font-family: "Roboto", sans-serif;
+    font-weight: 200;
+    font-style: normal;
     margin: 20px;
   }
 `;
