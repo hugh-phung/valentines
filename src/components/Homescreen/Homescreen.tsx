@@ -96,6 +96,7 @@ const Homescreen: React.FC<Props> = () => {
             leftPosition={position.x}
             topPosition={position.y}
             onMouseOver={handleHover}
+            onClick={handleHover}
           >
             No
           </NoButton>

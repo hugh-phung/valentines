@@ -46,7 +46,7 @@ export const NoButton = styled.button<NoButtonProps>`
   width: 10em;
   height: 70px;
   margin: 10px;
-  z-index: 1;
+  z-index: 999;
   font-size: 20px;
 `;
 
