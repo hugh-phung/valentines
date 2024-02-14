@@ -118,18 +118,19 @@ const Homescreen: React.FC<Props> = () => {
           >
             Yes
           </Button>
-
-          <Button
-            fontSize={buttonStyle.fontSize}
-            height={buttonStyle.height}
-            onMouseOver={() => {
-              setShowOriginalNo(false);
-              buttonStyle.visibility = "hidden";
-            }}
-            visibility={showOriginalNo ? "visible" : "hidden"}
-          >
-            No
-          </Button>
+          {count < 40 ? (
+            <Button
+              fontSize={buttonStyle.fontSize}
+              height={buttonStyle.height}
+              onMouseOver={() => {
+                setShowOriginalNo(false);
+                buttonStyle.visibility = "hidden";
+              }}
+              visibility={showOriginalNo ? "visible" : "hidden"}
+            >
+              No
+            </Button>
+          ) : null}
         </Wrapper>
       </>
     );
