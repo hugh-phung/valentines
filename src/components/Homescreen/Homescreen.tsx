@@ -77,7 +77,6 @@ const Homescreen: React.FC<Props> = () => {
   if (yesClicked) {
     return (
       <>
-        <MUImodal open={open} handleClose={handleClose} />
         <Wrapper>
           <CuteImage imgURL={imgURL} />
           <h1>I knew you would accept me!!</h1>
@@ -85,9 +84,11 @@ const Homescreen: React.FC<Props> = () => {
         </Wrapper>
       </>
     );
-  } else if (count < FINAL_MAX_COUNT) {
+  } else if (count <= FINAL_MAX_COUNT) {
     return (
       <>
+        <MUImodal open={open} handleClose={handleClose} />
+
         {!showOriginalNo ? (
           <NoButton
             leftPosition={position.x}
