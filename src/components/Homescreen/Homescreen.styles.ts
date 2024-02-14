@@ -8,6 +8,7 @@ type NoButtonProps = {
 type ButtonProps = {
   fontSize: number;
   height: number;
+  visibility: string;
 };
 
 export const Wrapper = styled.div`
@@ -34,6 +35,7 @@ export const Button = styled.button<ButtonProps>`
   margin-top: 20px;
   font-size: ${(props) => props.fontSize}px;
   cursor: pointer;
+  visibility: ${(props) => props.visibility};
 `;
 
 export const NoButton = styled.button<NoButtonProps>`

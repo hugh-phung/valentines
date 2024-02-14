@@ -25,6 +25,7 @@ const Homescreen: React.FC<Props> = () => {
   const [buttonStyle, setButtonStyle] = useState({
     fontSize: 20,
     height: 60,
+    visibility: "visible",
   });
 
   const [open, setOpen] = React.useState(false);
@@ -63,6 +64,7 @@ const Homescreen: React.FC<Props> = () => {
         setButtonStyle((prev) => ({
           fontSize: prev.fontSize * 1.1,
           height: prev.height * 1.1,
+          visibility: "visible",
         }));
       } else if (newCount > 50 && newCount <= FINAL_MAX_COUNT) {
         handleOpen();
@@ -108,6 +110,7 @@ const Homescreen: React.FC<Props> = () => {
           <Button
             fontSize={buttonStyle.fontSize}
             height={buttonStyle.height}
+            visibility="visible"
             onClick={() => {
               setimgURL("https://giphy.com/embed/wuBduJG4DIVpMqwaEj");
               setYesClicked(true);
@@ -115,15 +118,18 @@ const Homescreen: React.FC<Props> = () => {
           >
             Yes
           </Button>
-          {showOriginalNo ? (
-            <Button
-              fontSize={buttonStyle.fontSize}
-              height={buttonStyle.height}
-              onMouseOver={() => setShowOriginalNo(false)}
-            >
-              No
-            </Button>
-          ) : null}
+
+          <Button
+            fontSize={buttonStyle.fontSize}
+            height={buttonStyle.height}
+            onMouseOver={() => {
+              setShowOriginalNo(false);
+              buttonStyle.visibility = "hidden";
+            }}
+            visibility={showOriginalNo ? "visible" : "hidden"}
+          >
+            No
+          </Button>
         </Wrapper>
       </>
     );
@@ -142,7 +148,7 @@ const Homescreen: React.FC<Props> = () => {
           }
           onMouseLeave={() => setWinButtonText("Claim Prize")}
         >
-          <Button fontSize={20} height={60}>
+          <Button fontSize={20} height={60} visibility="visible">
             {winButtonText}
           </Button>
         </WinContainer>
